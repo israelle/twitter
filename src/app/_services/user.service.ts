@@ -5,7 +5,11 @@ import { User } from '../_models/index';
 
 @Injectable()
 export class UserService {
-    constructor(private http: HttpClient) { }
+
+    currentUser: User;
+    constructor(private http: HttpClient) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
 
     getAll() {
         return this.http.get<User[]>('/api/users');
