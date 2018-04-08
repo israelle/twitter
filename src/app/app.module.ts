@@ -17,6 +17,8 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import {MyProfileComponent} from './my-profile/my-profile.component';
+import {FooterComponent} from './footer/footer.component';
+import {HeaderComponent} from './header/header.component';
 
 @NgModule({
     imports: [
@@ -31,7 +33,9 @@ import {MyProfileComponent} from './my-profile/my-profile.component';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        MyProfileComponent
+        MyProfileComponent,
+        FooterComponent,
+        HeaderComponent,
     ],
     providers: [
         AuthGuard,

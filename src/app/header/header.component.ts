@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../_services';
 import {current} from 'codelyzer/util/syntaxKind';
+import {User} from '../_models';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import {current} from 'codelyzer/util/syntaxKind';
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser: any;
+  currentUser: User;
     isConnected: boolean;
   constructor(private userService: UserService) { }
 

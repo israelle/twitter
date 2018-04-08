@@ -4,8 +4,9 @@ import { User } from '../_models/index';
 import { UserService } from '../_services/index';
 
 @Component({
-    moduleId: module.id.toString(),
-    templateUrl: 'home.component.html'
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent implements OnInit {
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
     users: User[] = [];
 
     constructor(private userService: UserService) {
-
+        this.currentUser = this.userService.currentUser;
     }
 
     ngOnInit() {
