@@ -1,0 +1,40 @@
+
+<!--<div class="container">-->
+  <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+    <!--<a class="navbar-brand" href="#"><img src="/assets/logo_tweeter.png" width="30" height="30" alt=""></a>-->
+    <!--<a class="navbar-brand" href="#">Home</a>-->
+    <!--<a class="navbar-brand" href="#">My profile</a>-->
+    <!--<a class="navbar-brand" href="#">{{currentUser.username}}</a>-->
+    <!--<a class="navbar-brand"[routerLink]="['/login']">Logout</a>-->
+  <!--</nav>-->
+<!--</div>-->
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img src="/assets/logo_tweeter.png" width="30" height="30" alt="logo"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">À propos</a></li>
+      <li> <input type="text" class="navbar-brand" placeholder="recherche" name="s" class="form-control left-rounded"style="width: auto;"></li>
+      <li> <a href="#" class=" btn btn-default navbar-brand">ok</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <span *ngIf="isConnected">
+
+             <a class="navbar-brand" routerLink="/myProfile/{{currentUser.id}}"><span class="glyphicon glyphicon-user">{{currentUser.username}}</span></a>
+
+
+        </span>
+        <span *ngIf="!isConnected">User</span>
+
+      </li>
+
+      <li *ngIf="!isConnected"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li *ngIf="isConnected"><a [routerLink]="['/logout']"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
