@@ -12,13 +12,17 @@ import { UserService } from '../_services/index';
 export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
+    formData: any;
+    description: string;
+
 
     constructor(private userService: UserService) {
-        this.currentUser = this.userService.currentUser;
     }
 
     ngOnInit() {
         this.loadAllUsers();
+        this.initFormData();
+        this.currentUser = this.userService.currentUser;
     }
 
     deleteUser(id: number) {
@@ -28,5 +32,15 @@ export class HomeComponent implements OnInit {
 
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => { this.users = users; });
+    }
+
+    initFormData() {
+        this.formData = [];
+        this.formData.tweets = [{ description: '', day: ''}];
+        this.formData.user = [];
+    }
+
+    postTweet() {
+        this.formData.tweets.push({description: this.description});
     }
 }
