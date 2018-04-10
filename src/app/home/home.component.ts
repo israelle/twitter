@@ -1,7 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 import { User } from '../_models/index';
-import { UserService } from '../_services/index';
+import {AlertService, UserService} from '../_services/index';
+import {TweetService} from '../_services/tweet.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -14,9 +16,13 @@ export class HomeComponent implements OnInit {
     users: User[] = [];
     formData: any;
     description: string;
+    loading = false;
 
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private twitterService: TweetService,
+                private alertService: AlertService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -42,5 +48,15 @@ export class HomeComponent implements OnInit {
 
     postTweet() {
         this.formData.tweets.push({description: this.description});
+        this.twitterService.createTweet(this.formData.tweets)
+            .subscribe(
+                data => {
+                    this.alertService.success('Your tweet has send', true);
+                    this.router.navigate(['/home']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
     }
 }

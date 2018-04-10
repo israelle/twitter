@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/index';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
+import {TweetService} from './_services/tweet.service';
 
 @NgModule({
     imports: [
@@ -41,6 +42,7 @@ import {HeaderComponent} from './header/header.component';
         AuthGuard,
         AlertService,
         AuthenticationService,
+        TweetService,
         UserService,
         {
             provide: HTTP_INTERCEPTORS,
