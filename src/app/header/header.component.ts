@@ -26,5 +26,33 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  searchValue:any;
+  user:any;
+
+search(user) {
+
+
+  console.log("le modele ");
+              console.log(user);
+  
+  this.userService.search(user)
+      .subscribe(
+          
+          data => {
+            this.searchValue = data
+              console.log("le searchValue est");
+              console.log(data);
+                      
+          },
+          error => {
+
+              console.log("une erreur ");
+            
+          });
+}
+
+
+
+
 
 }

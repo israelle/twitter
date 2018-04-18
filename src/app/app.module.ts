@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import{RouterModule,Routes} from  '@angular/router';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
@@ -21,12 +22,21 @@ import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
 import {TweetService} from './_services/tweet.service';
 
+
+// const appRoutes: Routes = [
+   
+//     { path: 'home', component: HomeComponent },
+//     { path: 'home/:login', component: HomeComponent },
+    
+//   ];
+
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        routing
+        routing,
+        // RouterModule.forRoot(appRoutes)
     ],
     declarations: [
         AppComponent,

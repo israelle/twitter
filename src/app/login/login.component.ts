@@ -28,12 +28,26 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
+    road:any ={};
+    newRoad : string = "";
+
     login() {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+
+                    console.log("JE suis le data");
+                    console.log(data);
+
+                    this.road = data;
+                    this.newRoad = this.road.login
+
+                    
+
+
+                    
+                    //this.router.navigate(['/home/:login',  this.newRoad ]);
                 },
                 error => {
                     this.alertService.error(error);

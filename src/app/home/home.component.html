@@ -13,19 +13,30 @@
             <h3 class="panel-title">New tweet</h3>
         </div>
         <div class="panel-body">
-            <textarea id="newTweet" class="form-control " rows="3" style="resize:none;"[(ngModel)]="description" name="description"></textarea>
+            <textarea id="newTweet" class="form-control " rows="3" style="resize:none;"[(ngModel)]="model.content" name="description"></textarea>
         </div>
         <div class="panel-footer"></div>
     </div>
-    <div class="panel panel-primary" *ngFor="let tweet of formData.tweets">
+    <div class="panel panel-primary" *ngFor="let tweet of formData">
         <div class="panel-heading">
-            <h3 class="panel-title">{{currentUser.firstName}}</h3>
+            <h3 class="panel-title">{{tweet}}</h3>
         </div>
-        <div class="panel-body">
+        <!-- <div class="panel-body">
             <span>{{tweet.description}}</span>
-        </div>
+        </div> -->
         <div class="panel-footer"></div>
-    </div>
-    <button (click)="postTweet()" class="btn btn-primary">Post</button>
+    </div> 
+
+    <div class="panel panel-primary" *ngFor="let tab of tabFollowing">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{tab}}</h3>
+        </div>
+        <!-- <div class="panel-body">
+            <span>{{tweet.description}}</span>
+        </div> -->
+        <div class="panel-footer"></div>
+    </div> 
+
+    <button (click)="postTweet(model)" class="btn btn-primary">Post</button>
 
 </div>

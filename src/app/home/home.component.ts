@@ -25,16 +25,54 @@ export class HomeComponent implements OnInit {
                 private router: Router) {
     }
 
+
+    register(st : string) {
+
+        console.log("le modele ");
+                    console.log(st);
+        
+        this.loading = true;
+        this.userService.showTweets(st)
+            .subscribe(
+                
+                data => {
+                    this.formData = data
+                    console.log("je suis connecté recup all tweet");
+                    console.log(data);
+                            
+                },
+                error => {
+
+                    console.log("une erreur ");
+                    
+                  
+
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
+
+
+
+
+
+
+
+
+
     ngOnInit() {
         this.loadAllUsers();
         this.initFormData();
         this.currentUser = this.userService.currentUser;
+        this.showTweetOfFollowing("Corentin");
+        this.register("Corentin");
+        
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id).subscribe(() => {
-            this.loadAllUsers(); });
-    }
+
+
+
+
 
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => { this.users = users; });
@@ -46,17 +84,99 @@ export class HomeComponent implements OnInit {
         this.formData.user = [];
     }
 
-    postTweet() {
-        this.formData.tweets.push({description: this.description});
-        this.twitterService.createTweet(this.formData.tweets)
+    // postTweet() {
+    //     this.formData.tweets.push({description: this.description});
+    //     this.twitterService.createTweet(this.formData.tweets)
+    //         .subscribe(
+    //             data => {
+    //                 this.alertService.success('Your tweet has send', true);
+    //                 this.router.navigate(['/home']);
+    //             },
+    //             error => {
+    //                 this.alertService.error(error);
+    //                 this.loading = false;
+    //             });
+    // }
+
+
+    model: any = {
+        user: null,  
+        login: "",
+        content: "",
+        time:""
+    }
+
+    myData: any = {  
+        
+    };
+
+
+    postTweet(model) {
+
+        console.log("le modele ");
+                    console.log(model);
+
+                    model.login = "Corentin";
+        
+        this.loading = true;
+        this.userService.addNewTweet(model.login, model.content, model.time)
             .subscribe(
+                
                 data => {
-                    this.alertService.success('Your tweet has send', true);
-                    this.router.navigate(['/home']);
+                    this.myData = data
+                    this.formData.push(this.myData.content )
+                    console.log("je suis connecté recup all tweet");
+                    console.log(data);
+                    console.log(this.formData);
+                            
                 },
                 error => {
+
+                    console.log("une erreur ");
+                    
+                  
+
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+
+                model.content = "";
+    }
+
+
+    tabFollowing: any;
+
+    
+    showTweetOfFollowing(st : string) {
+
+        console.log("le modele ");
+                    console.log(st);
+        
+        this.loading = true;
+        this.userService.showAllTweetofFollowing(st)
+            .subscribe(
+                
+                data => {
+                    this.tabFollowing = data
+                    console.log("je suis connecté recup all tweet");
+                    console.log(data);
+                            
+                },
+                error => {
+
+                    console.log("une erreur ");
+                    
+                  
+
                     this.alertService.error(error);
                     this.loading = false;
                 });
     }
+
+
+
+
+
+
+    
 }

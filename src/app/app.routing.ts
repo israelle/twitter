@@ -12,6 +12,7 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'myProfile/:id', component: MyProfileComponent },
+    { path: 'home/:login', component: HomeComponent },
     { path: 'logout', component: LoginComponent },
 
     // otherwise redirect to home
