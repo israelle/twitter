@@ -19,13 +19,16 @@ import { RegisterComponent } from './register/index';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
+import {TweetService} from './_services/tweet.service';
+import { CollapseModule } from 'ngx-bootstrap';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        routing
+        routing,
+        CollapseModule.forRoot(),
     ],
     declarations: [
         AppComponent,
@@ -41,6 +44,7 @@ import {HeaderComponent} from './header/header.component';
         AuthGuard,
         AlertService,
         AuthenticationService,
+        TweetService,
         UserService,
         {
             provide: HTTP_INTERCEPTORS,

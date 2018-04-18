@@ -1,3 +1,9 @@
-#post_tweet {
+.panel-body {
+    width: 250px;
+    height: 90px;
+}
 
+textarea {
+    width: 317%;
+    height: 117%;
 }

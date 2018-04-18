@@ -20,7 +20,7 @@ export class RegisterComponent {
 
     register() {
         this.loading = true;
-        this.userService.create(this.model)
+        this.userService.create(this.model.username, this.model.password, this.model.confirmPassword)
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
