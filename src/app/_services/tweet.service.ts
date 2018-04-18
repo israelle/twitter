@@ -22,7 +22,7 @@ export class TweetService {
     }
 
     updateTweet(tweet: Tweet) {
-        return this.http.put('/api/tweets/' + tweet.id, tweet);
+        return this.http.put('/api/tweets/', tweet);
     }
 
     deleteTweet(id: number) {

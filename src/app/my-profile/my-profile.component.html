@@ -1,21 +1,97 @@
-<div id="conteneur">
 
-  <div id="header"></div>
-  <div id="menu">
-    <a href='#'>Accueil</a>
-    <a href='#'>Tweets</a>
-    <a href='#'>Abonnements</a>
-    <a href='#'>Abonnés</a>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Mon profile</title>
+</head>
+
+
+<div id="bloc_page" >
+
+  <div id="banniere_image">
+    <div id="banniere_description">
+      <a href="#" >Tweets</a>
+      <a href="#" >Abonnées</a>
+      <a href="#" >Abonnements</a>
+      <a href="#" >J'aime</a>
+      <a href="#" >Liste</a>
+      <a href="#" >Moment</a>
+    </div>
   </div>
-  <div id="corps">
 
-    <!--<div *ngFor="let tweet of currentUser.tweets"></div>-->
-  </div>
+  <section>
+    <article>
+        <div class="form-group">
+            <h1><img src="../../assets/sf.jpg" id="photo_profil" alt="Mon profil" class="ico_categorie img-circle float-left" />Mon Profil</h1>
+            <button type="button" class="btn btn-primary"
+                    (click)="isCollapsed = !isCollapsed"> Mes Amis
+            </button>
+            <hr>
+            <div [collapse]="isCollapsed" class="card card-block card-header">
+                <div class="well well-lg">
+                    <ul>
+                        <li><a href="#">Belette</a></li>
+                        <li><a href="#">Le concombre masqué</a></li>
+                        <li><a href="#">Ptit prince</a></li>
+                        <li><a href="#">Mr Fan</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
+
+            <h2 style="text-align: center">Mes tweets</h2>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" name="contentTweet" [(ngModel)]="contentTweet" placeholder="write your tweet" aria-label="write tweet" aria-describedby="basic-addon2">
+                        </textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-default" type="button" (click)="addNewTweet()">Post</button>
+                        </div>
+                    </div>
+
+            </tr>
+            <tr *ngFor="let tweet of formData.tweets">
+                <td>
+                   <div> {{ tweet.content }}</div>
+                    <div> {{ tweet.day }}</div>
+                    <div class="form-group">
+                        <div class="btn btn-link">
+                            <span><img [src]="imgSrc" class="size_like" (click)="imgSrc = onChangePicture();isClicked =false;"/></span>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </article>
+    <!--<aside>-->
+      <!--<h1>À propos de l'auteur</h1>-->
+      <!--<img src="images/bulle.png" alt="" id="fleche_bulle" />-->
+      <!--<p id="photo_zozor"><img src="images/zozor_classe.png" alt="Photo de Zozor" /></p>-->
+      <!--<p>Laisse-moi le temps de me présenter&nbsp;: je m'appelle Zozor, je suis né un 23 novembre 2005.</p>-->
+      <!--<p>Bien maigre, n'est-ce pas ? C'est pourquoi, aujourd'hui, j'ai décidé d'écrire ma biographie afin que vous sachiez qui je suis réellement.</p>-->
+      <!--&lt;!&ndash;<p>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a class="btn btn-block btn-social btn-twitter">&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="fa fa-twitter"></span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<img src="images/vimeo.png" alt="Vimeo" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<img src="images/flickr.png" alt="Flickr" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<img src="images/rss.png" alt="RSS" />&ndash;&gt;-->
+      <!--&lt;!&ndash;</p>&ndash;&gt;-->
+    <!--</aside>-->
+  </section>
+
+  <footer>
+    <div id="tweet">
+      <h1>Mon dernier tweet</h1>
+      <p>Hii haaaaaan !</p>
+      <p>le 12 mai à 23h12</p>
+    </div>
+  </footer>
 </div>
 
-
-<div class="form-group">
-  <img class="ProfileAvatar-image" src="../../assets/tambour.jpg" alt="Generic placeholder image" width="140" height="140">
-
-</div>
