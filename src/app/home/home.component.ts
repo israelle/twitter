@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-
+import {Tweet} from '../_models/tweet';
 import { User } from '../_models/index';
 import {AlertService, UserService} from '../_services/index';
 import {TweetService} from '../_services/tweet.service';
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     users: User[] = [];
     formData: any;
     description: string;
+    tweet: Tweet = {content: '', day: ''};
     loading = false;
 
 
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
         this.loadAllUsers();
         this.initFormData();
         this.currentUser = this.userService.currentUser;
+        this.formData.tweets = [{content: 'voila mon premier tweet', day: new Date().toLocaleString()},
+          {content: 'encore un autre tweet oklm', day: new Date().toLocaleString()}];
     }
 
     deleteUser(id: number) {

@@ -15,17 +15,22 @@
         <div class="panel-body">
             <textarea id="newTweet" class="form-control " rows="3" style="resize:none;"[(ngModel)]="description" name="description"></textarea>
         </div>
+        <div class="input-group-append">
+            <button (click)="postTweet()" class="btn btn-primary" [disabled]="!description" >Post</button>
+        </div>
         <div class="panel-footer"></div>
     </div>
+
+    <h2 style="text-align: center">what's up ?</h2>
+
     <div class="panel panel-primary" *ngFor="let tweet of formData.tweets">
         <div class="panel-heading">
             <h3 class="panel-title">{{currentUser.firstName}}</h3>
         </div>
+
         <div class="panel-body">
             <span>{{tweet.description}}</span>
         </div>
         <div class="panel-footer"></div>
     </div>
-    <button (click)="postTweet()" class="btn btn-primary">Post</button>
-
 </div>

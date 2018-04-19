@@ -4,6 +4,10 @@
 }
 
 textarea {
-    width: 317%;
+    width: 960px;
     height: 117%;
+}
+
+.btn-primary{
+    margin-left: 15px;
 }
