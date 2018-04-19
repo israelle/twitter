@@ -16,6 +16,8 @@ export class UserService {
 
     readonly API_URL  = "http://localhost:8080/twitter/"
 
+    public data: any;
+
 
     currentUser: User;
 
@@ -24,9 +26,7 @@ export class UserService {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
-    getAll() {
-        return this.http.get<User[]>('/api/users');
-    }
+    
 
 
     showTweets(username : string) {
@@ -65,9 +65,25 @@ export class UserService {
      
     }
 
+
+    allSuggestions() {
+        return this.http.get(this.API_URL+'suggestions');
+     
+    }
+
+
+ 
+
+
+
+
+
+    
+
+
+
     search(content:string) {
-        
-        
+           
         var reqHeader = new HttpHeaders({'Content-type':'application/json'});
 
         return this.http.post( this.API_URL + 'search/', {
@@ -109,8 +125,16 @@ export class UserService {
 
  
  
-    addFollower(login: string,  ) {
-        return this.http.post('/addFollower', login);
+    addFollowing(login: string, peopleFollowByUser: string  ) {
+        
+        var reqHeader = new HttpHeaders({'Content-type':'application/json'});
+
+        return this.http.post( this.API_URL + 'addFollowing/', {
+            "login" : login,
+            "peopleFollowByUser" : peopleFollowByUser
+            
+    
+           } , {headers:reqHeader });
     }
 
    

@@ -28,6 +28,7 @@
 
 
 <div id="bloc_page">
+
   <!--<header>-->
     <!--<div id="titre_principal">-->
       <!--<div id="logo">-->
@@ -124,16 +125,35 @@
     <div id="mes_amis">
       <h1>Suggestions</h1>
       <div id="listes_amis">
-        <ul *ngFor="let suggestion of users">
+        <!-- <ul *ngFor="let suggestion of users">
           <li><a href="#">{{suggestion}}</a></li>
-        </ul>
+        </ul> -->
+
+        <ul *ngFor="let suggestion of listSuggestions">
+          <li>(click)="addFollowing(suggestion)" {{suggestion}}</li>
+        </ul
+        
+        >
+
+        
+
+<!-- 
         <ul>
-          <li><a href="#">Belette</a></li>
+          <li><a href="#" >Belette</a></li>
           <li><a href="#">Le concombre masqué</a></li>
           <li><a href="#">Ptit prince</a></li>
           <li><a href="#">Mr Fan</a></li>
-        </ul>
+        </ul> -->
+
+         <ul *ngFor="let suggestion of listOfSugestion">
+          <li><a   (click)="addFollowing(suggestion)" >{{suggestion}}</a></li>
+         
+          
+        </ul> 
+
+        
       </div>
+      
     </div>
   </footer>
 </div>

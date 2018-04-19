@@ -1,9 +1,11 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { User } from '../_models/index';
 import {AlertService, UserService} from '../_services/index';
 import {TweetService} from '../_services/tweet.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
+
+
 
 @Component({
     selector: 'app-home',
@@ -17,28 +19,26 @@ export class HomeComponent implements OnInit {
     formData: any;
     description: string;
     loading = false;
+    @Output() myProfileName =new EventEmitter();
 
 
     constructor(private userService: UserService,
                 private twitterService: TweetService,
                 private alertService: AlertService,
-                private router: Router) {
+                private router: Router,
+                private route: ActivatedRoute) {
     }
 
 
     register(st : string) {
-
-        console.log("le modele ");
-                    console.log(st);
-        
+   
         this.loading = true;
         this.userService.showTweets(st)
             .subscribe(
                 
                 data => {
                     this.formData = data
-                    console.log("je suis connecté recup all tweet");
-                    console.log(data);
+                   
                             
                 },
                 error => {
@@ -54,29 +54,48 @@ export class HomeComponent implements OnInit {
 
 
 
+    ;
 
 
 
-
+theRoad:any;
 
 
     ngOnInit() {
-        this.loadAllUsers();
-        this.initFormData();
-        this.currentUser = this.userService.currentUser;
-        this.showTweetOfFollowing("Corentin");
-        this.register("Corentin");
+
+        this.route.params.subscribe((params) => {
+            console.log("je suis le route param de la home");
+            this.theRoad = params;
+
+            this.currentUser = this.theRoad.login;
+
+
+            console.log("Le crrent user est  ");
+            console.log( this.currentUser );
+
+
+            this.userService.data = this.currentUser;
+
+
         
+            
+          });
+
+          this.myProfileName.emit(this.userService.data);
+
+        
+    
+        
+        this.initFormData();
+        this.currentUser = this.theRoad.login;
+        this.showTweetOfFollowing(this.theRoad.login );
+        this.register(this.theRoad.login );
+    
     }
 
 
 
-
-
-
-    private loadAllUsers() {
-        this.userService.getAll().subscribe(users => { this.users = users; });
-    }
+  
 
     initFormData() {
         this.formData = [];
@@ -113,10 +132,9 @@ export class HomeComponent implements OnInit {
 
     postTweet(model) {
 
-        console.log("le modele ");
-                    console.log(model);
+        
 
-                    model.login = "Corentin";
+                    model.login = this.theRoad.login;
         
         this.loading = true;
         this.userService.addNewTweet(model.login, model.content, model.time)
@@ -125,9 +143,7 @@ export class HomeComponent implements OnInit {
                 data => {
                     this.myData = data
                     this.formData.push(this.myData.content )
-                    console.log("je suis connecté recup all tweet");
-                    console.log(data);
-                    console.log(this.formData);
+                    
                             
                 },
                 error => {
@@ -149,8 +165,8 @@ export class HomeComponent implements OnInit {
     
     showTweetOfFollowing(st : string) {
 
-        console.log("le modele ");
-                    console.log(st);
+        
+                    
         
         this.loading = true;
         this.userService.showAllTweetofFollowing(st)
@@ -158,8 +174,7 @@ export class HomeComponent implements OnInit {
                 
                 data => {
                     this.tabFollowing = data
-                    console.log("je suis connecté recup all tweet");
-                    console.log(data);
+                   
                             
                 },
                 error => {
@@ -172,6 +187,10 @@ export class HomeComponent implements OnInit {
                     this.loading = false;
                 });
     }
+
+
+
+    
 
 
 

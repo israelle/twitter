@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'myProfile/:id', component: MyProfileComponent },
+    { path: 'profil/:id', component: MyProfileComponent },
     { path: 'home/:login', component: HomeComponent },
     { path: 'logout', component: LoginComponent },
 

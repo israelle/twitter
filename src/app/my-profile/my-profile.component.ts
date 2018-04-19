@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../_services';
 import {Tweet} from '../_models/tweet';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -11,19 +12,46 @@ import {Tweet} from '../_models/tweet';
 export class MyProfileComponent implements OnInit {
 
   currentUser: any;
+  theRoadProfile:any;
   tweets: any = [];
   formData: any = [];
-    constructor(private userService: UserService) {}
+
+  user : any =  this.userService.data;
+
+
+    constructor(private userService: UserService,private route: ActivatedRoute) {}
 
   ngOnInit() {
+
+    this.route.params.subscribe((params) => {
+        console.log("je suis le route param de mon profile ");
+        this.theRoadProfile = params;
+        console.log(params);
+
+        console.log("je suis le this.theRoadProfile ");
+        console.log(this.theRoadProfile.id);
+        this.theRoadProfile = params;
+
+      });
+
+
+      console.log("je suis le this.userService.data   ");
+        console.log(this.userService.data );
+      
+   
       this.currentUser = this.userService.currentUser;
+      console.log(" le this.currentUser");
       console.log(this.currentUser);
-      this.numberOfTweet("Corentin");
-      this.numberPeopleIfollow("Corentin");
-      this.numberFollowers("Corentin");
-      this.showLastTweet("Corentin");
+      this.numberOfTweet(this.userService.data);
+      this.numberPeopleIfollow(this.userService.data);
+      this.numberFollowers(this.userService.data);
+      this.showLastTweet(this.userService.data);
+      this.suggestions();
+      
       
   }
+
+  
 
   
 
@@ -125,7 +153,7 @@ showLastTweet(st : string) {
           });
 }
 
-user : string = "Corentin";
+
 
 showAllPeopleFollowBy(user) {
 
@@ -163,7 +191,7 @@ showAllMyfollwers(user) {
           
           data => {
             this.allPeopleMyFollowers = data
-              console.log("le nombre de tweet est de");
+              console.log("ce sont allPeopleMyFollowers");
               console.log(data);
                       
           },
@@ -173,6 +201,65 @@ showAllMyfollwers(user) {
             
           });
 }
+
+
+
+following:  {
+    login : "Corentin",
+    peopleFollowByUser : any
+    
+   }
+
+   foll: any;
+
+   listSuggestions : any = [];
+
+
+addFollowing(f) {
+
+    console.log("le modele ");
+                console.log(f);
+    
+    this.userService.addFollowing(this.userService.data,  f)
+        .subscribe(
+            
+            data => {
+              this.allPeopleMyFollowers = data
+                console.log(" ces personne sont abonne à moi !");
+                console.log(data);
+                        
+            },
+            error => {
+  
+                console.log("une erreur ");
+              
+            });
+
+            this.showAllPeopleFollowBy(this.userService.data);
+  }
+
+
+listOfSugestion: any =  [];
+
+  suggestions() {
+
+    console.log("je suis la sugestion");
+
+    this.userService.allSuggestions()
+        .subscribe(
+            
+            data => {
+              this.listOfSugestion = data
+                console.log(" les sugestions!");
+                console.log(data);
+                        
+            },
+            error => {
+  
+                console.log("une erreur ");
+              
+            });
+  }
 
 
 
