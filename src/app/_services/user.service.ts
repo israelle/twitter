@@ -125,13 +125,14 @@ export class UserService {
 
  
  
-    addFollowing(login: string, peopleFollowByUser: string  ) {
+    addFollowing(login: string, peopleFollowByUser: string, followers: string   ) {
         
         var reqHeader = new HttpHeaders({'Content-type':'application/json'});
 
         return this.http.post( this.API_URL + 'addFollowing/', {
             "login" : login,
-            "peopleFollowByUser" : peopleFollowByUser
+            "peopleFollowByUser" : peopleFollowByUser,
+            "followers":followers
             
     
            } , {headers:reqHeader });

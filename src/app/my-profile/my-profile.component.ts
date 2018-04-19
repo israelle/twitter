@@ -220,7 +220,7 @@ addFollowing(f) {
     console.log("le modele ");
                 console.log(f);
     
-    this.userService.addFollowing(this.userService.data,  f)
+    this.userService.addFollowing(this.userService.data,  f,  f)
         .subscribe(
             
             data => {
