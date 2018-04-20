@@ -17,6 +17,9 @@ export class MyProfileComponent implements OnInit {
   formData: any = [];
 
   user : any =  this.userService.data;
+  searchValue: any = {
+    content : ""
+   };
 
 
     constructor(private userService: UserService,private route: ActivatedRoute) {}
@@ -261,7 +264,29 @@ listOfSugestion: any =  [];
             });
   }
 
+  search(searchValue) {
 
+
+    console.log("le modele ");
+                console.log(this.searchValue.content);
+    
+    this.userService.search(this.searchValue.content)
+        .subscribe(
+            
+            data => {
+              this.searchValue = data
+                console.log("le searchValue est");
+                console.log(data);
+                        
+            },
+            error => {
+  
+                console.log("une erreur ");
+              
+            });
+  }
+  
+  
 
 
   

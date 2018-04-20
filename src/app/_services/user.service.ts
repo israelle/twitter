@@ -6,10 +6,6 @@ import {Tweet} from '../_models/tweet';
 import { environment } from '../../environments/environment';
 
 
-//const API_URL = environment.api_url;
-
-
-
 
 @Injectable()
 export class UserService {
@@ -25,8 +21,6 @@ export class UserService {
     constructor(private http: HttpClient  ) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
-
-    
 
 
     showTweets(username : string) {
@@ -72,16 +66,6 @@ export class UserService {
     }
 
 
- 
-
-
-
-
-
-    
-
-
-
     search(content:string) {
            
         var reqHeader = new HttpHeaders({'Content-type':'application/json'});
@@ -93,9 +77,6 @@ export class UserService {
            } , {headers:reqHeader });
      
     }
-
-
- 
 
 
     create(username : string , password:string , confirmation : string) {
@@ -122,8 +103,6 @@ export class UserService {
            } , {headers:reqHeader });
 
     }
-
- 
  
     addFollowing(login: string, peopleFollowByUser: string, followers: string   ) {
         
@@ -137,8 +116,6 @@ export class UserService {
     
            } , {headers:reqHeader });
     }
-
-   
 
 
 }
